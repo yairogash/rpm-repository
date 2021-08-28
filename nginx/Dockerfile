@@ -22,7 +22,9 @@ RUN dnf download --resolve nginx && \
   repo2module  -s stable . modules.yaml && \
   modifyrepo_c --mdtype=modules modules.yaml repodata/
 
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY default.conf /etc/nginx/conf.d/default.conf
+
 
 EXPOSE 80
 ENTRYPOINT ["/usr/sbin/nginx", "-g", "daemon off;"]
