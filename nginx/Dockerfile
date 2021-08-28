@@ -1,10 +1,10 @@
-FROM centos:8
+FROM yairog/centos-nginx:8
 
 RUN yum update -y
 
 ARG REPOSITORY_FOLDER=/repository
 
-RUN yum install -y createrepo rpm-build rpm-sign wget gcc python3 yum-utils nginx && \
+RUN yum install -y createrepo rpm-build rpm-sign wget gcc python3 yum-utils && \
   mkdir ${REPOSITORY_FOLDER}
 
 # INSTALL modulemd-tools
@@ -23,8 +23,6 @@ RUN dnf download --resolve nginx && \
   modifyrepo_c --mdtype=modules modules.yaml repodata/
 
 COPY default.conf /etc/nginx/conf.d/default.conf
-
-
 
 EXPOSE 80
 ENTRYPOINT ["/usr/sbin/nginx", "-g", "daemon off;"]
