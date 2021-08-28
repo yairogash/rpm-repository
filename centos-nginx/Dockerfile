@@ -16,12 +16,12 @@ COPY ./healthcheck.sh /healthcheck.sh
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
   ln -sf /dev/stderr /var/log/nginx/error.log
 
-HEALTHCHECK \
-  --interval=15s \
-  --timeout=5s \
-  --start-period=1m \
-  --retries=2 \
-  CMD /healthcheck.sh
+#HEALTHCHECK \
+#  --interval=15s \
+#  --timeout=5s \
+#  --start-period=1m \
+#  --retries=2 \
+#  CMD /healthcheck.sh
 
 EXPOSE 80
 EXPOSE 443
