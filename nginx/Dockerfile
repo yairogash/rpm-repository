@@ -7,6 +7,8 @@ ARG REPOSITORY_FOLDER=/repository
 RUN yum install -y createrepo rpm-build rpm-sign wget gcc python3 yum-utils && \
   mkdir ${REPOSITORY_FOLDER}
 
+VOLUME ${REPOSITORY_FOLDER}
+
 # INSTALL modulemd-tools
 RUN wget https://download-ib01.fedoraproject.org/pub/epel/8/Everything/aarch64/Packages/e/epel-release-8-11.el8.noarch.rpm && \
   rpm -i epel-release-8-11.el8.noarch.rpm && \
@@ -24,6 +26,7 @@ RUN dnf download --resolve nginx && \
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY default.conf /etc/nginx/conf.d/default.conf
+
 
 
 EXPOSE 80
